@@ -1,0 +1,73 @@
+# tworzymy lokalnie branch experiment
+git checkout experiment
+
+# tworzymy lokalnie branch css-experiment i przechodzimy na niego
+git checkout css-experiment
+
+# chcemy przerzucić zmiany z css-experiment na koniec brancha experiment
+git rebase experiment
+
+# w tym momencie chcemy przerzucić wszystkie zmiany do mastera,
+# ale wybieramy opcję interaktywną, żeby poprawić historię
+git rebase -i master
+
+#Dostajemy okienko z:
+pick 88cb442 Experimenting with this cool javascript
+pick 99f08a4 Classes are sooooooooo cool
+pick 854b32a Destructuring in javascript, yay
+pick 18244f5 Darn it! Forgot this closing bracket
+pick 9057fc8 Description for this workshop
+pick 990ffe8 This is *really* cutting edge
+pick 9ce597b This may work
+pick f75f91c This may be good
+
+Zmieniamy je na:
+pick 88cb442 Experimenting with this cool javascript
+reword 99f08a4 Classes are sooooooooo cool
+pick 854b32a Destructuring in javascript, yay
+fixup 18244f5 Darn it! Forgot this closing bracket
+pick 9057fc8 Description for this workshop
+drop 990ffe8 This is *really* cutting edge
+pick 9ce597b This may work
+pick f75f91c This may be good
+
+#reword, aby zmienić commit message
+#fixup, żeby połączyć z poprzednim commitem ("Destructuring in javascript, yay"), ale nie brać pod uwagę opisu "Darn it!..."
+#drop, aby nie brać pod uwagę tego commita (nie chcemy, aby trafił na mastera)
+
+# Pierwsze okno, jakie się nam pojawi, to właśnie "reword", czyli zmiana opisu commita 99f08a4. 
+# Zmieniamy na coś bardziej odpowiedniego na przykład: "Use classes in ES2015"
+#
+# Następnie rebase się zatrzyma, ponieważ mamy konflikt w pliku index.html.
+# Można to sprawdzić przez "git status", rozwiązujemy konflikt albo w zwykłym edytorze tekstu
+# albo w takim, który wspomaga operację "merge", na przykład kdiff3, TortoiseGit albo vim.
+#
+# Po rozwiązaniu konfliktu dodajemy plik index.html do "staging area"
+# i używamy opcji --continue, aby aplikować kolejne commity na mastera
+git add index.html
+git rebase --continue
+
+# Dostaniemy kolejne okno, abyśmy mogli poprawić ewentualnie opis dla commita, w którym był konflikt
+# Po zamknięciu tego okna rebase jest zakończony.
+# Możemy przejśc na branch master i zrobić "fast-forward", czyli przeniesienie brancha master, do miejsca,
+# w którym zakończył się rebase.
+# Robiy to też operację "rebase". Moglibyśmy użyć tutaj również "merge" i wynik byłby taki sam, ale w ćwiczeniu
+# nie mieliśmy używać "merge". Operacja fast-forward jest tylko przesunięciem wskaźnika.
+git checkout master
+git rebase css-experiment
+
+# Teraz możemy już usunąć eksperymentalne branche. Usuwamy je z opcją -D, a nie -d, ponieważ nie zostały one
+# wmerge'owane do mastera. Zamiast tego użyliśmy rebase, aby mieć kontrolę nad tym, które commity "weszły" na master
+# w jakiej kolejności, ile ich było i z jakimi opisami się pojawiły.
+git branch -D css-experiment
+git branch -D experiment
+
+# Widzimy teraz, że historia na master jest liniowa
+#
+# I jak? Ciężko było? 
+# Brawo! rebase to jedna z ciekawszych i trudnych do zrozumienia rzeczy w gicie.
+# Teraz już z górki! Miłej dalszej nauki gita :)
+
+
+
+
