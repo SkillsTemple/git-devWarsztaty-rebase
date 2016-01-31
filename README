@@ -1,0 +1,21 @@
+Ćwiczenie z warsztatów gita z okazji devWarsztatów, 30 stycznia 2016.
+
+Opis:
+Zaczęliśmy z kolegą pracę na eksperymentalnym branchu "experiment".
+Niektóre z naszych pomysłów były dobre, inne mniej, jeszcze w innym
+momencie po prostu zapomnieliśmy nawiasu zamykającego. W międzyczasie
+mój kolega stworzył kolejnego brancha "css-experiment", aby popracować
+nad stylami. Musimy zająć się już czymś innym, chcemy więc wrzucić nasze
+zmiany do brancha "master", ale chcemy też przy okazji lekko poprawić historię.
+
+Zadanie:
+Przerzucić zmiany z branchy experiment i css-experiment na branch master
+nie używając "merge".
+1. Nie używamy "merge", historia powinna być jedną linią.
+2. Zmiany dotyczące css powinny znaleźć się na końcu (commity 5951cf7 i ba0c7a8).
+3. Commit 99f08a4 powinien mieć poprawiony opis (teraz ma opis: "Classes are sooooooooo cool");
+4. Commit 990ffe8 (z opisem: "This is *really* cutting edge") nie powinien znaleźć się w masterze,
+bo nie wyszła nam ta funkcjonalność.
+5. Zmiana z commita 18244f5 ("Darn it! Forgot this closing bracket") powinna trafić
+na mastera, ale trzeba pozbyć się samego commita, bo to tylko drobny błąd.
+6. Pozbyć się eksperymentalnych branchy.
